@@ -7,42 +7,43 @@
     </ul>
 
     <input
+      v-model="message"
       class="border-solid border-2 border-indigo-600"
       type="text"
-      v-model="message"
       @keyup.enter.prevent="addMessage"
-    />
+    >
   </div>
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState } from 'vuex'
 
 export default {
-  created() {
-    this.receiveMessages();
-  },
-
   data: () => ({
-    message: "",
+    message: '',
   }),
-
-  methods: {
-    ...mapActions({
-      receiveMessages: "receiveMessages",
-      sendMessage: "sendMessage",
-    }),
-
-    addMessage(message) {
-      this.sendMessage(this.message);
-      this.message = "";
-    },
-  },
 
   computed: {
     ...mapState({
-      messages: "messages",
+      messages: 'messages',
     }),
   },
-};
+
+  created () {
+    this.receiveMessages()
+  },
+
+  methods: {
+    ...mapActions({
+      receiveMessages: 'receiveMessages',
+      sendMessage: 'sendMessage',
+    }),
+
+    addMessage (message) {
+      this.sendMessage(this.message)
+      this.message = ''
+    },
+  },
+
+}
 </script>
